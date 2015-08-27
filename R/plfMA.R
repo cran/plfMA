@@ -17,7 +17,9 @@ function(h,...){
 	dma<-gbutton("MA-plot",container=gp2,anchor=c(-1,1));size(dma)=c(100,40);
 	ddensity<-gbutton("Density-plot",container=gp2,anchor=c(-1,1));size(ddensity)=c(100,40);
 	glabel("\t\t",container=gp2)
-	export<-gbutton("Export",container=gp2,anchor=c(1,-1),spacing=50);size(export)=c(50,25)
+	import<-gbutton("New",container=gp2,anchor=c(1,-1),spacing=50);size(import)=c(50,25)
+	enabled(import)<-TRUE
+	export<-gbutton("Export",container=gp2,anchor=c(1,-1));size(export)=c(50,25)
 	enabled(export)<-FALSE
 	
 	gp3<-gpanedgroup(horizontal=TRUE,spacing=20,use.scrollwindow=FALSE,container=gp1,expand=TRUE)
@@ -361,6 +363,17 @@ function(h,...){
 	
 	err=NULL;err=plot(h)
 	enabled(export)<-TRUE
+	
+	newdata=NULL
+	addHandlerClicked(import,handler=function(h5,...){
+		newdata<-tclvalue(tkgetOpenFile())
+		if(length(newdata)!=0){
+			nd1<-read.table(newdata,sep="\t",header=TRUE)
+			h<<-as.matrix(nd1)
+			plot(h)
+		}
+	}
+	)
 
 	click1=NULL;click2=NULL;click3=NULL;click4=NULL;click5=NULL;click6=NULL;click7=NULL;click8=NULL;
 	addHandlerClicked(dplot,handler=function(h2,...){
