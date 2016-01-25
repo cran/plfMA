@@ -1,23 +1,36 @@
 \name{plfMA}
 \alias{plfMA}
-\title{A GUI to view, design and export various graphs of data}
+\title{
+A function to launch the plfMA GUI.
+}
 \description{
-Provides a graphical user interface for viewing and designing various types of graphs of the data. The graphs can be saved in various formats of an image like .jpeg, .png, .bmp, .pdf, and .postscript. New data can also be imported to view, design and export it as graphs in different formats.
+A function to launch the plfMA GUI.
 }
 \usage{
 plfMA(h,...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{h}{Data matrix, data frame, RGList, MAList }
-  \item{\dots}{Other arguments }
+	\item{h}{Data matrix, data frame, RGList, MAList or Empty}
+	\item{\dots}{Other arguments for h object or Empty}
 }
 \details{
-Function launches a Graphical User Interface using gWidgets package. It uses tcltk interface for smooth processing while importing the data and exporting as graphs.
+Once the package is loaded with library and a data object is created, the GUI can be launced using this function.
 }
-\author{Dhammapal Bharne, Vaibhav Vindal
+\value{
+None.
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\author{
+Dhammapal Bharne & Vaibhav Vindal, Department of Biotechnology and Bioinformatics, School of Life Sciences, University of Hyderabad, Hyderabad, Telangana, India.
 }
 \examples{
-x<-matrix(1:100,nc=10)
-plfMA(x)
+plfMA()			# Launch the function and then import a tab delimited file
+x<-matrix(1:100,nc=10)	# Create a data object
+plfMA(x)		# Execute the function for a data object
 }
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ GUI }

@@ -5,6 +5,8 @@ function(h,...){
 	options(guiToolkit="RGtk2")
 #	require(tcltk)
 	try(dispose(wp),silent=TRUE)
+	try(y<-h,silent=TRUE)
+	if(!exists("y"))h<-matrix(1:100,ncol=10)
 	wp<<-gwindow("Quality Control",visible=FALSE,horizontal=TRUE,width=1000,height=600)
 	gp1<-gpanedgroup(horizontal=FALSE,spacing=5,use.scrollwindow=FALSE,container=wp)
 	gp2<-ggroup(horizontal=TRUE,container=gp1)
