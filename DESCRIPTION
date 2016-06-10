@@ -1,8 +1,8 @@
 Package: plfMA
 Type: Package
 Title: A GUI to View, Design and Export Various Graphs of Data
-Version: 1.0.2
-Date: 2016-01-25
+Version: 1.0.3
+Date: 2016-06-10
 Author: Dhammapal Bharne, Vaibhav Vindal
 Maintainer: Dhammapal Bharne <dhammapalb@uohyd.ac.in>
 Imports: gWidgets, limma, gWidgetsRGtk2, tcltk, cairoDevice, grDevices,
@@ -11,6 +11,6 @@ Description: Provides a graphical user interface for viewing and designing vario
 License: GPL-2
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2016-01-25 06:41:02 UTC; dhamma
+Packaged: 2016-06-10 05:20:18 UTC; dhamma
 Repository: CRAN
-Date/Publication: 2016-01-25 08:49:36
+Date/Publication: 2016-06-10 07:41:26

@@ -28,7 +28,7 @@ Dhammapal Bharne & Vaibhav Vindal, Department of Biotechnology and Bioinformatic
 }
 \examples{
 plfMA()			# Launch the function and then import a tab delimited file
-x<-matrix(1:100,nc=10)	# Create a data object
+x<-matrix(1:100,ncol=10)	# Create a data object
 plfMA(x)		# Execute the function for a data object
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

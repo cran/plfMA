@@ -229,12 +229,19 @@ function(h,...){
 	gp55<-ggroup(container=gp5)
 
 	gp41<-ggroup(container=gp4)
-	glabel("                                          ",container=gp41)
+	glabel("                                  ",container=gp41)
 	set<-gbutton("Set",container=gp41,anchor=c(-1,-1))
+	size(set)=c(50,25)
+	reset<-gbutton("Reset",container=gp41,anchor=c(-1,-1))
 	size(set)=c(50,25)
 	exit<-gbutton("Exit",container=gp41,anchor=c(-1,-1))
 	size(exit)=c(50,25)
-	
+
+	addHandlerClicked(reset,handler=function(he1,...){
+		dispose(wp)
+		plfMA(h)
+		}
+	)
 	addHandlerClicked(exit,handler=function(he,...){
 		dispose(wp)
 		}
@@ -538,12 +545,12 @@ function(h,...){
 		
 		if(click1==1&&(length(c(click2,click3,click4,click5,click6,click7,click8)))==0)
 		{
-			err=NULL;err=plot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+			err=NULL;err=try((plot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-			type=p_ty,col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+			type=p_ty,col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot Scatter plot such data",title="Plotting Error")
 				}
@@ -551,12 +558,12 @@ function(h,...){
 		if(click2==1&&(length(c(click1,click3,click4,click5,click6,click7,click8)))==0)
 		{
 			t5=NULL
-			err=NULL;err=hist(h,main=t1,sub=t2,xlab=t3,ylab=t4,ylim=t6,family=fc_family,
+			err=NULL;err=try((hist(h,main=t1,sub=t2,xlab=t3,ylab=t4,ylim=t6,family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-			col=fgc_colors,bg=bgc_colors,border=bdc_colors,pch=pch_s,lty=lty_s,lwd=t7)
+			col=fgc_colors,bg=bgc_colors,border=bdc_colors,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot Histogram such data",title="Plotting Error")
 				}
@@ -567,13 +574,13 @@ function(h,...){
 			if(ty_log=="")enabled(addc_s)<-TRUE
 			barplot(h,col.axis=bgc_colors,log=ty_log)
 			rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-			err=NULL;err=barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+			err=NULL;err=try((barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 			col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-			add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+			add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot Barplot such data",title="Plotting Error")
 				}
@@ -584,25 +591,27 @@ function(h,...){
 			if(ty_log=="")enabled(addc_s)<-TRUE
 			boxplot(h,col.axis=bgc_colors,log=ty_log)
 			rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-			err=NULL;err=boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
+			par(family=fc_family)
+			par(cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
+			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea
+			)
+			err=NULL;err=try((boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,
 			col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-			add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+			add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot Boxplot such data",title="Plotting Error")
 				}
 			} else
 		if(click5==1&&(length(c(click1,click2,click3,click4,click6,click7,click8)))==0)
 		{		
-			err=NULL;err=pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+			err=NULL;err=try((pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-			col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,pch=pch_s,lty=lty_s,lwd=t7)
+			col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot Pie chart such data",title="Plotting Error")
 				}
@@ -613,37 +622,37 @@ function(h,...){
 			x=seq(0,1,length.out=nrow(h))
 			y=seq(0,1,length.out=ncol(h))
 			z=h
-			err=NULL;err=persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),zlim=range(z,na.rm=TRUE),
+			err=NULL;err=try((persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),zlim=range(z,na.rm=TRUE),
 			family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-			col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,pch=pch_s,lty=lty_s,lwd=t7)
+			col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot 3D plot such data",title="Plotting Error")
 				}
 			} else
 		if(click7==1&&(length(c(click1,click2,click3,click4,click5,click6,click8)))==0)
 		{
-			err=NULL;err=plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+			err=NULL;err=try((plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-			col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+			col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot MA plot such data",title="Plotting Error")
 				}
 			} else
 		if(click8==1&&(length(c(click1,click2,click3,click4,click5,click6,click7)))==0)
 		{
-			err=NULL;err=plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+			err=NULL;err=try((plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 			cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 			cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 			cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 			cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-			col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+			col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 			if(length(grep("Error in",err))!=0){
 				gmessage("Cannot Density plot such data",title="Plotting Error")
 				}
@@ -748,7 +757,7 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
 						plot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
@@ -835,7 +844,7 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
 						hist(h,main=t1,sub=t2,xlab=t3,ylab=t4,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
@@ -872,13 +881,13 @@ function(h,...){
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
 						pch=pch_s,lty=lty_s,lwd=t7)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
  					}
 					
@@ -895,13 +904,13 @@ function(h,...){
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
 						pch=pch_s,lty=lty_s,lwd=t7)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -918,13 +927,13 @@ function(h,...){
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
 						pch=pch_s,lty=lty_s,lwd=t7)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -942,13 +951,13 @@ function(h,...){
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
 						pch=pch_s,lty=lty_s,lwd=t7)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -957,7 +966,7 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
 						barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
@@ -966,13 +975,13 @@ function(h,...){
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
 						pch=pch_s,lty=lty_s,lwd=t7)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((barplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -995,20 +1004,17 @@ function(h,...){
 					{
 						jpeg(jpegFileName)
 						par(bg=bgc_colors)
-						boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
-						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
-						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						boxplot(h,col.axis=bgc_colors,log=ty_log)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
+						par(family=fc_family)
+						par(cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
+						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea
+						)
+						err=NULL;err=try((boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
  					}
 					
@@ -1017,20 +1023,17 @@ function(h,...){
 					{
 						png(jpegFileName)
 						par(bg=bgc_colors)
-						boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
-						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
-						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						boxplot(h,col.axis=bgc_colors,log=ty_log)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
+						par(family=fc_family)
+						par(cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
+						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea
+						)
+						err=NULL;err=try((boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1039,20 +1042,17 @@ function(h,...){
 					{
 						bmp(jpegFileName)
 						par(bg=bgc_colors)
-						boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
-						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
-						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						boxplot(h,col.axis=bgc_colors,log=ty_log)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
+						par(family=fc_family)
+						par(cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
+						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea
+						)
+						err=NULL;err=try((boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1062,20 +1062,17 @@ function(h,...){
 						pdf(jpegFileName)
 						par(bg=bgc_colors)
 						if(length(fc_family)==0 || fc_family=="normal" || fc_family=="symbol")fc_family<-"sans"
-						boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
-						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
-						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						boxplot(h,col.axis=bgc_colors,log=ty_log)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
+						par(family=fc_family)
+						par(cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
+						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea
+						)
+						err=NULL;err=try((boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1084,21 +1081,18 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
-						boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
-						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
-						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						boxplot(h,col.axis=bgc_colors,log=ty_log)
 						rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=addc_colors)
-						err=NULL;err=boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
-						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
+						par(family=fc_family)
+						par(cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
-						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
+						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea
+						)
+						err=NULL;err=try((boxplot(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)
+						add=TRUE,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1121,13 +1115,13 @@ function(h,...){
 					{
 						jpeg(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
  					}
 					
@@ -1136,13 +1130,13 @@ function(h,...){
 					{
 						png(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1151,13 +1145,13 @@ function(h,...){
 					{
 						bmp(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1167,13 +1161,13 @@ function(h,...){
 						pdf(jpegFileName)
 						par(bg=bgc_colors)
 						if(length(fc_family)==0 || fc_family=="normal" || fc_family=="symbol")fc_family<-"sans"
-						err=NULL;err=pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1182,14 +1176,14 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
-						err=NULL;err=pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						err=NULL;err=try((pie(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,radius=ty_r,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1217,14 +1211,14 @@ function(h,...){
 						y=seq(0,1,length.out=ncol(h))
 						z=h
 						persp(h)
-						err=NULL;err=persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
+						err=NULL;err=try((persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
 						zlim=range(z,na.rm=TRUE),family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
  					}
 					
@@ -1237,14 +1231,14 @@ function(h,...){
 						y=seq(0,1,length.out=ncol(h))
 						z=h
 						persp(h)
-						err=NULL;err=persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
+						err=NULL;err=try((persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
 						zlim=range(z,na.rm=TRUE),family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1257,14 +1251,14 @@ function(h,...){
 						y=seq(0,1,length.out=ncol(h))
 						z=h
 						persp(h)
-						err=NULL;err=persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
+						err=NULL;err=try((persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
 						zlim=range(z,na.rm=TRUE),family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1277,14 +1271,14 @@ function(h,...){
 						x=seq(0,1,length.out=nrow(h))
 						y=seq(0,1,length.out=ncol(h))
 						z=h
-						err=NULL;err=persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
+						err=NULL;err=try((persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
 						zlim=range(z,na.rm=TRUE),family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1293,18 +1287,18 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
 						x=seq(0,1,length.out=nrow(h))
 						y=seq(0,1,length.out=ncol(h))
 						z=h
-						err=NULL;err=persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
+						err=NULL;err=try((persp(x,y,z,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=range(x),ylim=range(y),
 						zlim=range(z,na.rm=TRUE),family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,shade=ty_sh,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1327,12 +1321,12 @@ function(h,...){
 					{
 						jpeg(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
  					}
 					
@@ -1341,12 +1335,12 @@ function(h,...){
 					{
 						png(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1355,12 +1349,12 @@ function(h,...){
 					{
 						bmp(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1370,12 +1364,12 @@ function(h,...){
 						pdf(jpegFileName)
 						par(bg=bgc_colors)
 						if(length(fc_family)==0 || fc_family=="normal" || fc_family=="symbol")fc_family<-"sans"
-						err=NULL;err=plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1384,13 +1378,13 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
-						err=NULL;err=plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						err=NULL;err=try((plotMA(h,main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
-						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)
+						col=fgc_colors,bg=bgc_colors,log=ty_log,pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1413,13 +1407,13 @@ function(h,...){
 					{
 						jpeg(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
  					}
 					
@@ -1428,13 +1422,13 @@ function(h,...){
 					{
 						png(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1443,13 +1437,13 @@ function(h,...){
 					{
 						bmp(jpegFileName)
 						par(bg=bgc_colors)
-						err=NULL;err=plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
 				    }
 				    
@@ -1459,13 +1453,13 @@ function(h,...){
 						pdf(jpegFileName)
 						par(bg=bgc_colors)
 						if(length(fc_family)==0 || fc_family=="normal" || fc_family=="symbol")fc_family<-"sans"
-						err=NULL;err=plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						err=NULL;err=try((plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    
@@ -1474,14 +1468,14 @@ function(h,...){
 					{
 						postscript(jpegFileName)
 						par(bg=bgc_colors)
-						if(fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
-						err=NULL;err=plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
+						if(length(fc_family)==0 || fc_family=="sans" || fc_family=="serif" || fc_family=="mono")fc_family<-"normal"
+						err=NULL;err=try((plot(density(h),main=t1,sub=t2,xlab=t3,ylab=t4,xlim=t5,ylim=t6,family=fc_family,
 						cex.main=fc_sizet,col.main=fc_colorst,font.main=fc_stylet,
 						cex.sub=fc_sizes,col.sub=fc_colorss,font.sub=fc_styles,
 						cex.lab=fc_sizel,col.lab=fc_colorsl,font.lab=fc_stylel,
 						cex.axis=fc_sizea,col.axis=fc_colorsa,font.axis=fc_stylea,
 						col=fgc_colors,bg=bgc_colors,border=bdc_colors,log=ty_log,
-						pch=pch_s,lty=lty_s,lwd=t7)
+						pch=pch_s,lty=lty_s,lwd=t7)),silent=TRUE)
 						dev.off()
     				}
 				    

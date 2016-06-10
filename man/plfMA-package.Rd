@@ -11,8 +11,8 @@ Provides a graphical user interface for viewing and designing various types of g
 	\tabular{ll}{
 		Package: \tab plfMA\cr
 		Type: \tab Package\cr
-		Version: \tab 1.0.2\cr
-		Date: \tab 2016-01-25\cr
+		Version: \tab 1.0.3\cr
+		Date: \tab 2016-06-10\cr
 		License: \tab GPL-2\cr
 	}
 	Just type pflMA() at R prompt to launch the GUI. Alternatively, create a data object such as x at R prompt and launch the GUI by typing plfMA(x).
