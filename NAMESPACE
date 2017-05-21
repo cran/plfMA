@@ -1,6 +1,7 @@
 exportPattern("^[[:alpha:]]+")
 import(gWidgets)
 import(limma)
+import(RGtk2)
 import(gWidgetsRGtk2)
 import(tcltk)
 import(cairoDevice)

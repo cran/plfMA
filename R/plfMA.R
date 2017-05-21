@@ -1,5 +1,4 @@
-plfMA <-
-function(h,...){
+plfMA<-function(h,...){
 #	library(gWidgets)
 #	library(limma)
 	options(guiToolkit="RGtk2")
@@ -34,30 +33,30 @@ function(h,...){
 	gp71<-ggroup(container=gp7)
 	main<-gbutton("Main",container=gp71,anchor=c(-1,1))
 	size(main)=c(50,25)
-	main_text<-gedit("",initial.msg="Title",width=27,height=20,container=gp71,anchor=c(-1,1))
+	main_text<-gedit("",initial.msg="",width=27,height=20,container=gp71,anchor=c(-1,1))
 	
 	gp72<-ggroup(container=gp7)
 	sub<-gbutton("Sub",container=gp72,anchor=c(-1,1))
 	size(sub)=c(50,25)
-	sub_text<-gedit("",initial.msg="Subtitle",width=27,height=20,container=gp72,anchor=c(-1,1))
+	sub_text<-gedit("",initial.msg="",width=27,height=20,container=gp72,anchor=c(-1,1))
 	
 	gp73<-ggroup(container=gp7)
 	sub<-gbutton("X-label",container=gp73,anchor=c(-1,1))
 	size(sub)=c(50,25)
-	x_lab<-gedit("",initial.msg="X-label",width=27,height=20,container=gp73,anchor=c(-1,1))
+	x_lab<-gedit("",initial.msg="",width=27,height=20,container=gp73,anchor=c(-1,1))
 	
 	gp74<-ggroup(container=gp7)
 	sub<-gbutton("Y-label",container=gp74,anchor=c(-1,1))
 	size(sub)=c(50,25)
-	y_lab<-gedit("",initial.msg="Y-label",width=27,height=20,container=gp74,anchor=c(-1,1))
+	y_lab<-gedit("",initial.msg="",width=27,height=20,container=gp74,anchor=c(-1,1))
 
 	gp60<-ggroup(container=gp6)
 	sub<-gbutton("X-limits",container=gp60,anchor=c(-1,1))
 	size(sub)=c(60,25)
-	x_lim<-gedit("",initial.msg="xmin,xmax",width=8,height=20,container=gp60,anchor=c(-1,1))
+	x_lim<-gedit("",initial.msg="",width=8,height=20,container=gp60,anchor=c(-1,1))
 	sub<-gbutton("Y-limits",container=gp60,anchor=c(-1,1))
 	size(sub)=c(60,25)
-	y_lim<-gedit("",initial.msg="ymin,ymax",width=8,height=20,container=gp60,anchor=c(-1,1))
+	y_lim<-gedit("",initial.msg="",width=8,height=20,container=gp60,anchor=c(-1,1))
 	
 	fc_family=NULL;
 	gp600<-ggroup(container=gp6)
@@ -311,7 +310,7 @@ function(h,...){
 	}
 	)
 	size(lty_type)<-c(72,25)
-	lwd_type<-gedit("",initial.msg="number",width=8,height=20,container=gp56_2,anchor=c(-1,1))
+	lwd_type<-gedit("",initial.msg="",width=8,height=20,container=gp56_2,anchor=c(-1,1))
 	size(lwd_type)<-c(72,25)
 	
 	p_ty_l<-gbutton("Type",container=gp53,anchor=c(-1,1))
