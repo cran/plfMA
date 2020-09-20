@@ -6,7 +6,7 @@ plfMA<-function(h,...){
 	try(dispose(wp),silent=TRUE)
 	try(y<-h,silent=TRUE)
 	if(!exists("y"))h<-matrix(1:100,ncol=10)
-	wp<<-gwindow("Quality Control",visible=FALSE,horizontal=TRUE,width=1000,height=600)
+	wp<<-gwindow("Quality Control",visible=FALSE,fill="x",width=1000,height=600)
 	gp1<-gpanedgroup(horizontal=FALSE,spacing=5,use.scrollwindow=FALSE,container=wp)
 	gp2<-ggroup(horizontal=TRUE,container=gp1)
 	dplot<-gbutton("Scatter-Plot",container=gp2,anchor=c(-1,1));size(dplot)=c(100,40);
@@ -23,7 +23,7 @@ plfMA<-function(h,...){
 	export<-gbutton("Export",container=gp2,anchor=c(1,-1));size(export)=c(50,25)
 	enabled(export)<-FALSE
 	
-	gp3<-gpanedgroup(horizontal=TRUE,spacing=20,use.scrollwindow=FALSE,container=gp1,expand=TRUE)
+	gp3<-gpanedgroup(horizontal=TRUE,container=gp1,expand=TRUE)
 	
 	gp4<-ggroup(container=gp3,horizontal=FALSE)
 	gp5<-ggroup(container=gp4,horizontal=FALSE)
@@ -247,7 +247,7 @@ plfMA<-function(h,...){
 	)
 
 	gp8<-ggroup(container=gp3,expand=TRUE)
-	plotarea<-ggraphics(ps=5,use.scrollwindow=FALSE,horizontal=FALSE,container=gp8)
+	plotarea<-ggraphics(width=700,height=400,dpi=50,ps = 12,use.scrollwindow=FALSE,horizontal=FALSE,container=gp8)
 	visible(wp)<-TRUE
 	bgc<-gbutton("BG color",container=gp51,anchor=c(-1,1))
 	size(bgc)=c(63,25)
