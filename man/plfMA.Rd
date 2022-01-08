@@ -7,20 +7,21 @@ A function to launch the plfMA GUI.
 A function to launch the plfMA GUI.
 }
 \usage{
-plfMA(h,...)
+plfMA(h,gtype,...)
 }
 \arguments{
 	\item{h}{Data matrix, data frame, RGList, MAList or Empty}
+	\item{gtype}{Graph type or Empty if h is empty}
 	\item{\dots}{Other arguments for h object or Empty}
 }
 \details{
-Once the package is loaded with library and a data object is created, the GUI can be launced using this function.
+Once the package is loaded with library function, the GUI can be launced using this function.
 }
 \author{
 Dhammapal Bharne & Vaibhav Vindal, Department of Biotechnology and Bioinformatics, School of Life Sciences, University of Hyderabad, Hyderabad, Telangana, India.
 }
 \examples{
-x<-matrix(1:100,ncol=10)
-plfMA(x)
+x<-matrix(1:60,ncol=6)
+plfMA(x,gtype="heatmap")
 }
 \keyword{ GUI }
